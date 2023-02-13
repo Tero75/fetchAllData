@@ -3,12 +3,13 @@ console.log("started....")
 //Free Star Wars api
 let url = 'https://swapi.dev/api/';
 
-const fetchButton = document.getElementById("fetchButton")
-const fetchAllMalesButton = document.getElementById("fetchAllMalesButton")
-const fetchAllFemalesButton = document.getElementById("fetchAllFemalesButton")
-const fetchAllVehiclesButton = document.getElementById("fetchAllVehiclesButton")
-const fetchInput = document.getElementById("fetchInput")
-const resultArea = document.getElementById("resultArea")
+const fetchButton = document.querySelector("#fetchButton")
+const fetchAllMalesButton = document.querySelector("#fetchAllMalesButton")
+const fetchAllFemalesButton = document.querySelector("#fetchAllFemalesButton")
+const fetchAllVehiclesButton = document.querySelector("#fetchAllVehiclesButton")
+const fetchInput = document.querySelector("#fetchInput")
+const resultArea = document.querySelector("#resultArea")
+const clearResultsButton = document.querySelector("#clearResultsButton")
 
 fetchButton.addEventListener("click", async ()=> {
     console.log("Fetch Button pressed")
@@ -32,6 +33,12 @@ fetchAllVehiclesButton.addEventListener("click", async ()=> {
     console.log("Fetch Button pressed")
     let results = await GetAllVehicles()
     results.forEach(element => resultArea.innerHTML += element.name.toString()+"\n")
+})
+
+clearResultsButton.addEventListener("click",()=> {
+    console.log("Clear Result Button pressed")
+    let results = ""
+    resultArea.innerHTML = results
 })
 
 async function GetResultByGender(gender){
