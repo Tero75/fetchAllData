@@ -7,33 +7,42 @@ const fetchAllRobotsButton = document.querySelector("#fetchAllRobotsButton")
 const fetchAllMalesButton = document.querySelector("#fetchAllMalesButton")
 const fetchAllFemalesButton = document.querySelector("#fetchAllFemalesButton")
 const fetchAllVehiclesButton = document.querySelector("#fetchAllVehiclesButton")
-const fetchInput = document.querySelector("#fetchInput")//text inputfield
-const resultArea = document.querySelector("#resultArea")//where results are written
+const resultArea = document.querySelector("#resultArea")
 const clearResultsButton = document.querySelector("#clearResultsButton")
+const fetchInput = document.querySelector("#fetchInput")
+const getAllDataButton = document.querySelector("#getAllDataButton")
+let results
 
 fetchAllRobotsButton.addEventListener("click", async ()=> {
-    let results = await GetResultByGender("n/a")
-    results.forEach(element => resultArea.innerHTML += element.name.toString()+"\n")
+    results = await GetResultByGender("n/a") 
+    //results.forEach(element => resultArea.innerHTML += Object.entries(element).map(([key, value]) => `${key}: ${value}\n`).join(''))
+    results.forEach(element => resultArea.innerHTML += element.name +"\n")
 })
 
 fetchAllMalesButton.addEventListener("click", async ()=> {
-    let results = await GetResultByGender("male")
-    results.forEach(element => resultArea.innerHTML += element.name.toString()+"\n")
+    results = await GetResultByGender("male")
+    results.forEach(element => resultArea.innerHTML += element.name +"\n")
 })
 
 fetchAllFemalesButton.addEventListener("click", async ()=> {
-    let results = await GetResultByGender("female")
-    results.forEach(element => resultArea.innerHTML += element.name.toString()+"\n")
+    results = await GetResultByGender("female")
+    results.forEach(element => resultArea.innerHTML += element.name +"\n")
 })
 
 fetchAllVehiclesButton.addEventListener("click", async ()=> {
-    let results = await GetAllVehicles()
-    results.forEach(element => resultArea.innerHTML += element.name.toString()+"\n")
+    results = await GetAllVehicles()
+    results.forEach(element => resultArea.innerHTML += element.name +"\n")
 })
 
 clearResultsButton.addEventListener("click",()=> {
     resultArea.innerHTML = ""
 })
+
+getAllDataButton.addEventListener("click",()=>{
+    resultArea.innerHTML += "---------------------------------------------------------------\n\n"
+    results.forEach((element,index) =>{if(element.name==fetchInput.value) resultArea.innerHTML += Object.entries(results[index]).map(([key, value]) => `${key}: ${value}\n`).join('')} )
+})   
+
 
 async function GetResultByGender(gender){
     let data = await APICall_swapi("people")
