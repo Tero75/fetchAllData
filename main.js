@@ -11,26 +11,29 @@ const resultArea = document.querySelector("#resultArea")
 const clearResultsButton = document.querySelector("#clearResultsButton")
 const fetchInput = document.querySelector("#fetchInput")
 const getAllDataButton = document.querySelector("#getAllDataButton")
-let results
+let resultsArray = new Array
 
 fetchAllRobotsButton.addEventListener("click", async ()=> {
-    results = await GetResultByGender("n/a") 
-    //results.forEach(element => resultArea.innerHTML += Object.entries(element).map(([key, value]) => `${key}: ${value}\n`).join(''))
+    let results = await GetResultByGender("n/a")
+    resultsArray.push(...results)//so that you can search all added robots persons and vehicles
     results.forEach(element => resultArea.innerHTML += element.name +"\n")
 })
 
 fetchAllMalesButton.addEventListener("click", async ()=> {
-    results = await GetResultByGender("male")
+    let results = await GetResultByGender("male")
+    resultsArray.push(...results)
     results.forEach(element => resultArea.innerHTML += element.name +"\n")
 })
 
 fetchAllFemalesButton.addEventListener("click", async ()=> {
-    results = await GetResultByGender("female")
+    let results = await GetResultByGender("female")
+    resultsArray.push(...results)
     results.forEach(element => resultArea.innerHTML += element.name +"\n")
 })
 
 fetchAllVehiclesButton.addEventListener("click", async ()=> {
-    results = await GetAllVehicles()
+    let results = await GetAllVehicles()
+    resultsArray.push(...results)
     results.forEach(element => resultArea.innerHTML += element.name +"\n")
 })
 
@@ -40,7 +43,7 @@ clearResultsButton.addEventListener("click",()=> {
 
 getAllDataButton.addEventListener("click",()=>{
     resultArea.innerHTML += "---------------------------------------------------------------\n\n"
-    results.forEach((element,index) =>{if(element.name==fetchInput.value) resultArea.innerHTML += Object.entries(results[index]).map(([key, value]) => `${key}: ${value}\n`).join('')} )
+    resultsArray.forEach((element,index) =>{if(element.name==fetchInput.value) resultArea.innerHTML += Object.entries(resultsArray[index]).map(([key, value]) => `${key}: ${value}\n`).join('')} )
 })   
 
 
