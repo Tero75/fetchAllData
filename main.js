@@ -14,24 +14,28 @@ const getAllDataButton = document.querySelector("#getAllDataButton")
 let resultsArray = new Array
 
 fetchAllRobotsButton.addEventListener("click", async ()=> {
+    resultArea.innerHTML += "fetching robots...\n"
     let results = await GetResultByGender("n/a")
     resultsArray.push(...results)//so that you can search all added robots persons and vehicles
     results.forEach(element => resultArea.innerHTML += element.name +"\n")
 })
 
 fetchAllMalesButton.addEventListener("click", async ()=> {
+    resultArea.innerHTML += "fetching males...\n"
     let results = await GetResultByGender("male")
     resultsArray.push(...results)
     results.forEach(element => resultArea.innerHTML += element.name +"\n")
 })
 
 fetchAllFemalesButton.addEventListener("click", async ()=> {
+    resultArea.innerHTML += "fetching females...\n"
     let results = await GetResultByGender("female")
     resultsArray.push(...results)
     results.forEach(element => resultArea.innerHTML += element.name +"\n")
 })
 
 fetchAllVehiclesButton.addEventListener("click", async ()=> {
+    resultArea.innerHTML += "fetching vehicles...\n"
     let results = await GetAllVehicles()
     resultsArray.push(...results)
     results.forEach(element => resultArea.innerHTML += element.name +"\n")
