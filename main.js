@@ -18,6 +18,11 @@ const clearResultsButton = document.querySelector("#clearResultsButton")
 const refreshPageButton = document.querySelector("#refreshPageButton")
 let resultsArray = new Array
 
+fetchInput.addEventListener("input",(e)=>{
+    let searchParameter = new RegExp(e.data,'i') 
+    resultsArray.map(element => element.name ||element.title).forEach(element => {if(element.match(searchParameter)) resultArea.insertAdjacentHTML("beforeend",element + "\n")})   
+})
+
 fetchAllRobotsButton.addEventListener("click", async ()=> {
     document.querySelector("#fetchAllRobotsButton").disabled = true
     resultArea.insertAdjacentHTML("beforeend","fetching robots...\n")
@@ -78,7 +83,6 @@ fetchAllFilmsButton.addEventListener("click", async ()=> {
     document.querySelector("#fetchAllFilmsButton").disabled = true
     resultArea.insertAdjacentHTML("beforeend","\nfetching films......\n")
     let results = await GetAllFilms()
-    console.log(results)
     resultsArray.push(...results)
     results.forEach(element => resultArea.insertAdjacentHTML("beforeend",element.title +" / ") )
 })
@@ -86,12 +90,11 @@ fetchAllFilmsButton.addEventListener("click", async ()=> {
 
 clearResultsButton.addEventListener("click",()=> {resultArea.innerHTML = ""})
 refreshPageButton.addEventListener("click",()=>{window.location.reload()})
+getAllDataButton.addEventListener("click",()=>{ getAllData()})
 
-getAllDataButton.addEventListener("click",()=>{
-    resultArea.insertAdjacentHTML("beforeend","\n---------------------------------------------------------------\n\n")
-    resultsArray.forEach((element,index) =>{if(element.name==fetchInput.value|element.title==fetchInput.value) resultArea.insertAdjacentHTML("beforeend", Object.entries(resultsArray[index]).map(([key, value]) => `${key}: ${value}\n`).join(''))} )
-})   
-
+function getAllData (){
+    resultsArray.forEach((element,index) =>{if(element.name==fetchInput.value||element.title==fetchInput.value) resultArea.insertAdjacentHTML("beforeend", Object.entries(resultsArray[index]).map(([key, value]) => `${key}: ${value}\n`).join(''))} )
+}
 
 async function GetResultByGender(gender){
     let data = await APICall_swapi("people")
