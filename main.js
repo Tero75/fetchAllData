@@ -18,9 +18,12 @@ const clearResultsButton = document.querySelector("#clearResultsButton")
 const refreshPageButton = document.querySelector("#refreshPageButton")
 let resultsArray = new Array
 
-fetchInput.addEventListener("input",(e)=>{
-    let searchParameter = new RegExp(e.data,'i') 
-    resultsArray.map(element => element.name ||element.title).forEach(element => {if(element.match(searchParameter)) resultArea.insertAdjacentHTML("beforeend",element + "\n")})   
+fetchInput.addEventListener("input",()=>{
+
+    let titlesAndNames = resultsArray.map(element => element.name ||element.title)
+    let searchParameter = new RegExp(fetchInput.value,'gi') 
+    resultArea.innerHTML = ""
+    titlesAndNames.forEach(element => {if(element.match(searchParameter)) resultArea.insertAdjacentHTML("beforeend",element + "\n")})   
 })
 
 fetchAllRobotsButton.addEventListener("click", async ()=> {
@@ -65,7 +68,7 @@ fetchAllPlanetsButton.addEventListener("click", async ()=> {
 
 fetchAllSpeciesButton.addEventListener("click", async ()=> {
     document.querySelector("#fetchAllSpeciesButton").disabled = true
-    resultArea.insertAdjacentHTML("beforeend","\nfetching planets......\n")
+    resultArea.insertAdjacentHTML("beforeend","\nfetching species......\n")
     let results = await GetAllSpecies()
     resultsArray.push(...results)
     results.forEach(element => resultArea.insertAdjacentHTML("beforeend",element.name +" / ") )
@@ -73,7 +76,7 @@ fetchAllSpeciesButton.addEventListener("click", async ()=> {
 
 fetchAllStarshipsButton.addEventListener("click", async ()=> {
     document.querySelector("#fetchAllStarshipsButton").disabled = true
-    resultArea.insertAdjacentHTML("beforeend","\nfetching planets......\n")
+    resultArea.insertAdjacentHTML("beforeend","\nfetching starships......\n")
     let results = await GetAllStarships()
     resultsArray.push(...results)
     results.forEach(element => resultArea.insertAdjacentHTML("beforeend",element.name +" / ") )
@@ -91,6 +94,7 @@ fetchAllFilmsButton.addEventListener("click", async ()=> {
 clearResultsButton.addEventListener("click",()=> {resultArea.innerHTML = ""})
 refreshPageButton.addEventListener("click",()=>{window.location.reload()})
 getAllDataButton.addEventListener("click",()=>{ getAllData()})
+
 
 function getAllData (){
     resultsArray.forEach((element,index) =>{if(element.name==fetchInput.value||element.title==fetchInput.value) resultArea.insertAdjacentHTML("beforeend", Object.entries(resultsArray[index]).map(([key, value]) => `${key}: ${value}\n`).join(''))} )
