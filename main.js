@@ -73,10 +73,14 @@ function fetchInputAdded (){
     let searchParameter = new RegExp(fetchInput.value,'gi') 
     let header = new String("<div class='form-control pt-2' id='suggestion'>")
     let footer = new String("</div>")
-    resultBox.innerHTML = ""
-    resultBox.insertAdjacentHTML("beforeend",header)
-    titlesAndNames.forEach(element => {if(element.match(searchParameter)) showSuggestions(element)})
-    resultBox.insertAdjacentHTML("beforeend",footer)    
+    if(fetchInput.value != 0) {
+        resultBox.innerHTML = ""
+        resultBox.insertAdjacentHTML("beforeend",header)
+        titlesAndNames.forEach(element => {if(element.match(searchParameter)) showSuggestions(element)})
+        resultBox.insertAdjacentHTML("beforeend",footer)
+    } else {
+        resultBox.innerHTML = ""
+    }
 }
 
 function showSuggestions(searchItem){
