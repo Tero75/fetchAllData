@@ -16,7 +16,7 @@ const fetchInput = document.querySelector("#fetchInput")
 const getAllDataButton = document.querySelector("#getAllDataButton")
 const clearResultsButton = document.querySelector("#clearResultsButton")
 const refreshPageButton = document.querySelector("#refreshPageButton")
-const resultBox = document.querySelector(".resultBox")
+const datalist = document.querySelector("#suggestion")
 let resultsArray = new Array
 
 fetchInput.addEventListener("input",()=>{
@@ -70,90 +70,83 @@ getAllDataButton.addEventListener("click",()=>{ getAllData()})
 
 function fetchInputAdded (){
     let titlesAndNames = resultsArray.map(element => element.name ||element.title)
-    let searchParameter = new RegExp(fetchInput.value,'gi') 
-    let header = new String("<div class='form-control pt-2' id='suggestion'>")
-    let footer = new String("</div>")
-    if(fetchInput.value != 0) {
-        resultBox.innerHTML = ""
-        resultBox.insertAdjacentHTML("beforeend",header)
-        titlesAndNames.forEach(element => {if(element.match(searchParameter)) showSuggestions(element)})
-        resultBox.insertAdjacentHTML("beforeend",footer)
-    } else {
-        resultBox.innerHTML = ""
-    }
+    let searchParameter = new RegExp(fetchInput.value,'gi')
+    while(datalist.hasChildNodes()){datalist.removeChild(datalist.firstChild)}//remove options before crearing new list of options
+    titlesAndNames.forEach(element => {if(element.match(searchParameter)) showSuggestions(element)})
 }
 
 function showSuggestions(searchItem){
-    let suggestion = document.querySelector("#suggestion")
-    suggestion.insertAdjacentHTML("beforeend", searchItem + '</br>')
+    let options = document.createElement("option")
+    options.value = searchItem
+    datalist.appendChild(options)
 }
 
 function fetchAllRobotsButtonPressed (results){
     document.querySelector("#fetchAllRobotsButton").disabled = true
-    //resultArea.insertAdjacentHTML("beforeend","fetching robots...\n")
+    resultArea.insertAdjacentHTML("beforeend","fetching robots...\n")
     resultsArray.push(...results)//so that you can search all added robots persons and vehicles
-    results.forEach(element => resultArea.insertAdjacentHTML("beforeend",element.name +" / ") )
+    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllMalesButtonPressed(results){
     document.querySelector("#fetchAllMalesButton").disabled = true
-    //resultArea.insertAdjacentHTML("beforeend","\nfetching males......\n")
+    resultArea.insertAdjacentHTML("beforeend","\nfetching males......\n")
     resultsArray.push(...results)
-    results.forEach(element => resultArea.insertAdjacentHTML("beforeend",element.name +" / ") )
+    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllFemalesButtonPressed(results){
     document.querySelector("#fetchAllFemalesButton").disabled = true
-    //resultArea.insertAdjacentHTML("beforeend","\nfetching females......\n")
+    resultArea.insertAdjacentHTML("beforeend","\nfetching females......\n")
     resultsArray.push(...results)
-    results.forEach(element => resultArea.insertAdjacentHTML("beforeend",element.name +" / ") )
+    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllVehiclesButtonPressed(results){
     document.querySelector("#fetchAllVehiclesButton").disabled = true
-    //resultArea.insertAdjacentHTML("beforeend","\nfetching vehicles......\n")
+    resultArea.insertAdjacentHTML("beforeend","\nfetching vehicles......\n")
     resultsArray.push(...results)
-    results.forEach(element => resultArea.insertAdjacentHTML("beforeend",element.name +" / ") )
+    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllPlanetsButtonPressed(results){
     document.querySelector("#fetchAllPlanetsButton").disabled = true
-    //resultArea.insertAdjacentHTML("beforeend","\nfetching planets......\n")
+    resultArea.insertAdjacentHTML("beforeend","\nfetching planets......\n")
     resultsArray.push(...results)
-    results.forEach(element => resultArea.insertAdjacentHTML("beforeend",element.name +" / ") )
+    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllSpeciesButtonPressed(results){
     document.querySelector("#fetchAllSpeciesButton").disabled = true
-    //resultArea.insertAdjacentHTML("beforeend","\nfetching species......\n")
+    resultArea.insertAdjacentHTML("beforeend","\nfetching species......\n")
     resultsArray.push(...results)
-    results.forEach(element => resultArea.insertAdjacentHTML("beforeend",element.name +" / ") )
+    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllStarshipsButtonPressed(results){
     document.querySelector("#fetchAllStarshipsButton").disabled = true
-    //resultArea.insertAdjacentHTML("beforeend","\nfetching starships......\n")
+    resultArea.insertAdjacentHTML("beforeend","\nfetching starships......\n")
     resultsArray.push(...results)
-    results.forEach(element => resultArea.insertAdjacentHTML("beforeend",element.name +" / ") )
+    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllFilmsButtonPressed(results){
     document.querySelector("#fetchAllFilmsButton").disabled = true
-    //resultArea.insertAdjacentHTML("beforeend","\nfetching films......\n")
+    resultArea.insertAdjacentHTML("beforeend","\nfetching films......\n")
     resultsArray.push(...results)
-    results.forEach(element => resultArea.insertAdjacentHTML("beforeend",element.title +" / ") )
+    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.title +" / ") )
 
 }
 
 function getAllData (){
-    resultsArray.forEach((element,index) =>{if(element.name==fetchInput.value||element.title==fetchInput.value) resultArea.insertAdjacentHTML("beforeend", Object.entries(resultsArray[index]).map(([key, value]) => `${key}: ${value}\n`).join(''))} )
+    resultsArray.forEach((element,index) =>{if(element.name==fetchInput.value||element.title==fetchInput.value) resultArea.insertAdjacentText("beforeend", Object.entries(resultsArray[index]).map(([key, value]) => `${key}: ${value}\n`).join(''))} )
 }
 
 async function GetResultByGender(gender){
