@@ -79,7 +79,7 @@ getAllDataButton.addEventListener("click",()=>{ getAllData()})
 function fetchInputAdded (){
     let titlesAndNames = resultsArray.map(element => element.name ||element.title)
     let searchParameter = new RegExp(fetchInput.value,'gi')
-    while(datalist.hasChildNodes()){datalist.removeChild(datalist.firstChild)}//remove options before crearing new list of options
+    while(datalist.hasChildNodes()){datalist.removeChild(datalist.firstChild)}//remove options before creating new list of options
     titlesAndNames.forEach(element => {if(element.match(searchParameter)) showSuggestions(element)})
 }
 
