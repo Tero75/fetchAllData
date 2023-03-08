@@ -24,42 +24,50 @@ fetchInput.addEventListener("input",()=>{
 })
 
 fetchAllRobotsButton.addEventListener("click", async ()=> {
+    resultArea.insertAdjacentHTML("beforeend","fetching robots...\n")
     let results = await GetResultByGender("n/a")
     fetchAllRobotsButtonPressed(results)
 })
 
 fetchAllMalesButton.addEventListener("click", async ()=> {
+    resultArea.insertAdjacentHTML("beforeend","\nfetching males......\n")
     let results = await GetResultByGender("male")
     fetchAllMalesButtonPressed(results)
 })
 
 fetchAllFemalesButton.addEventListener("click", async ()=> {
+    resultArea.insertAdjacentHTML("beforeend","\nfetching females......\n")
     let results = await GetResultByGender("female")
     fetchAllFemalesButtonPressed(results)
 })
 
 fetchAllVehiclesButton.addEventListener("click", async ()=> {
+    resultArea.insertAdjacentHTML("beforeend","\nfetching vehicles......\n")
     let results = await GetAllVehicles()
     fetchAllVehiclesButtonPressed(results)
 })
 
 fetchAllPlanetsButton.addEventListener("click", async ()=> {
+    resultArea.insertAdjacentHTML("beforeend","\nfetching planets......\n")
     let results = await GetAllPlanets()
     fetchAllPlanetsButtonPressed(results)
 })
 
 fetchAllSpeciesButton.addEventListener("click", async ()=> {
+    resultArea.insertAdjacentHTML("beforeend","\nfetching species......\n")
     let results = await GetAllSpecies()
     fetchAllSpeciesButtonPressed(results)
 })
 
 fetchAllStarshipsButton.addEventListener("click", async ()=> {
+    resultArea.insertAdjacentHTML("beforeend","\nfetching starships......\n")
     let results = await GetAllStarships()
     fetchAllStarshipsButtonPressed(results)
 })
 
 
 fetchAllFilmsButton.addEventListener("click", async ()=> {
+    resultArea.insertAdjacentHTML("beforeend","\nfetching films......\n")
     let results = await GetAllFilms()
     fetchAllFilmsButtonPressed(results)
 })
@@ -83,63 +91,56 @@ function showSuggestions(searchItem){
 
 function fetchAllRobotsButtonPressed (results){
     document.querySelector("#fetchAllRobotsButton").disabled = true
-    resultArea.insertAdjacentHTML("beforeend","fetching robots...\n")
+    
     resultsArray.push(...results)//so that you can search all added robots persons and vehicles
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllMalesButtonPressed(results){
-    document.querySelector("#fetchAllMalesButton").disabled = true
-    resultArea.insertAdjacentHTML("beforeend","\nfetching males......\n")
+    document.querySelector("#fetchAllMalesButton").disabled = true    
     resultsArray.push(...results)
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllFemalesButtonPressed(results){
-    document.querySelector("#fetchAllFemalesButton").disabled = true
-    resultArea.insertAdjacentHTML("beforeend","\nfetching females......\n")
+    document.querySelector("#fetchAllFemalesButton").disabled = true    
     resultsArray.push(...results)
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllVehiclesButtonPressed(results){
-    document.querySelector("#fetchAllVehiclesButton").disabled = true
-    resultArea.insertAdjacentHTML("beforeend","\nfetching vehicles......\n")
+    document.querySelector("#fetchAllVehiclesButton").disabled = true    
     resultsArray.push(...results)
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllPlanetsButtonPressed(results){
-    document.querySelector("#fetchAllPlanetsButton").disabled = true
-    resultArea.insertAdjacentHTML("beforeend","\nfetching planets......\n")
+    document.querySelector("#fetchAllPlanetsButton").disabled = true    
     resultsArray.push(...results)
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllSpeciesButtonPressed(results){
-    document.querySelector("#fetchAllSpeciesButton").disabled = true
-    resultArea.insertAdjacentHTML("beforeend","\nfetching species......\n")
+    document.querySelector("#fetchAllSpeciesButton").disabled = true    
     resultsArray.push(...results)
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllStarshipsButtonPressed(results){
-    document.querySelector("#fetchAllStarshipsButton").disabled = true
-    resultArea.insertAdjacentHTML("beforeend","\nfetching starships......\n")
+    document.querySelector("#fetchAllStarshipsButton").disabled = true    
     resultsArray.push(...results)
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
 
 function fetchAllFilmsButtonPressed(results){
-    document.querySelector("#fetchAllFilmsButton").disabled = true
-    resultArea.insertAdjacentHTML("beforeend","\nfetching films......\n")
+    document.querySelector("#fetchAllFilmsButton").disabled = true    
     resultsArray.push(...results)
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.title +" / ") )
 
