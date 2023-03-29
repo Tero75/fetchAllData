@@ -76,11 +76,9 @@ clearResultsButton.addEventListener("click",()=> {resultArea.innerHTML = ""})
 refreshPageButton.addEventListener("click",()=>{window.location.reload()})
 getAllDataButton.addEventListener("click",()=>{ getAllData()})
 
-function fetchInputAdded (){
-    let titlesAndNames = resultsArray.map(element => element.name ||element.title)
-    let searchParameter = new RegExp(fetchInput.value,'gi')
-    while(datalist.hasChildNodes()){datalist.removeChild(datalist.firstChild)}//remove options before creating new list of options
-    titlesAndNames.forEach(element => {if(element.match(searchParameter)) showSuggestions(element)})
+function fetchInputAdded (){    
+    removeAllChildNodes(datalist) // delete previous datalist before creating new
+    resultsArray.map(element => element.name ||element.title).forEach(element => {if(element.match(new RegExp(fetchInput.value,'gi'))) showSuggestions(element)})
 }
 
 function showSuggestions(searchItem){
@@ -148,6 +146,12 @@ function fetchAllFilmsButtonPressed(results){
 
 function getAllData (){
     resultsArray.forEach((element,index) =>{if(element.name==fetchInput.value||element.title==fetchInput.value) resultArea.insertAdjacentText("beforeend", Object.entries(resultsArray[index]).map(([key, value]) => `${key}: ${value}\n`).join(''))} )
+}
+
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
 }
 
 async function GetResultByGender(gender){
