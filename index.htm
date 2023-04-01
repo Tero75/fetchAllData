@@ -25,11 +25,15 @@
                 <button id="fetchAllFilmsButton" type="button"class="btn btn-primary">Films</button>
             
             </div>
-            <div class="textInput d-flex justify-content-center pt-2">
-                <input class="form-control" type="search" placeholder="Search..." id="fetchInput" autocomplete="off" list="suggestion">
-                <button id="getAllDataButton" type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
-                <datalist id="suggestion">
-                </datalist>
+            <div class="searchBar" id="searchBar">
+                <div class="textInput d-flex justify-content-center pt-2">
+                    <input class="form-control" type="search" placeholder="Search..." id="fetchInput" autocomplete="off">
+                    <button id="getAllDataButton" type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                </div>
+                <div>
+                    <select class="suggestion" id="suggestion" hidden="true" style="width: 90vw;" size = 1>                        
+                    </select>
+                </div>
             </div>
             <div class="resultArea d-flex justify-content-center pt-2">
                 <textarea readonly class="form-control" id="resultArea" style="width: 90vw; height: 50vh;"></textarea>

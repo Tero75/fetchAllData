@@ -16,11 +16,17 @@ const fetchInput = document.querySelector("#fetchInput")
 const getAllDataButton = document.querySelector("#getAllDataButton")
 const clearResultsButton = document.querySelector("#clearResultsButton")
 const refreshPageButton = document.querySelector("#refreshPageButton")
-const datalist = document.querySelector("#suggestion")
-let resultsArray = new Array
+const suggestion = document.querySelector("#suggestion")
+let resultsArray = []
 
 fetchInput.addEventListener("input",()=>{
+    //get text written to search... bar
     fetchInputAdded()
+})
+
+suggestion.addEventListener("click", (event)=> {
+      //to catch selected option
+      fetchInput.value = event.target.value
 })
 
 fetchAllRobotsButton.addEventListener("click", async ()=> {
@@ -76,20 +82,30 @@ clearResultsButton.addEventListener("click",()=> {resultArea.innerHTML = ""})
 refreshPageButton.addEventListener("click",()=>{window.location.reload()})
 getAllDataButton.addEventListener("click",()=>{ getAllData()})
 
-function fetchInputAdded (){    
-    removeAllChildNodes(datalist) // delete previous datalist before creating new
-    resultsArray.map(element => element.name ||element.title).forEach(element => {if(element.match(new RegExp(fetchInput.value,'gi'))) showSuggestions(element)})
+function fetchInputAdded (){ 
+
+    removeAllChildNodes(suggestion) // removes older options before updating options
+    resultsArray.map(element => element.name || element.title).forEach(element => createSuggestions(element)) //creates new list of options
+    let dropDownList = suggestion.childNodes // gets live list of option nodes
+    suggestion.size = 1 //resets dropdown list size to default
+    
+    if ( fetchInput.value != 0) {
+        suggestion.hidden = false //makes dropdown visible       
+        dropDownList.forEach(element => {if (element.label.match(new RegExp(fetchInput.value,'gi'))) {element.hidden = false; suggestion.size = suggestion.size + 1;} else element.hidden = true})//hides or reveals options based on regex       
+    }  else {
+        suggestion.hidden = true //hides dropdown
+    }
 }
 
-function showSuggestions(searchItem){
+function createSuggestions(searchItem){
     let options = document.createElement("option")
     options.value = searchItem
-    datalist.appendChild(options)
+    options.textContent = searchItem
+    suggestion.appendChild(options)
 }
 
 function fetchAllRobotsButtonPressed (results){
-    document.querySelector("#fetchAllRobotsButton").disabled = true
-    
+    document.querySelector("#fetchAllRobotsButton").disabled = true    
     resultsArray.push(...results)//so that you can search all added robots persons and vehicles
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
