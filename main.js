@@ -84,14 +84,13 @@ getAllDataButton.addEventListener("click",()=>{ getAllData()})
 
 function fetchInputAdded (){ 
 
-    removeAllChildNodes(suggestion) // removes older options before updating options
-    resultsArray.map(element => element.name || element.title).forEach(element => createSuggestions(element)) //creates new list of options
-    let dropDownList = suggestion.childNodes // gets live list of option nodes
+    console.log(suggestion)
+    let dropDownList = document.querySelectorAll("#suggestion")
     suggestion.size = 1 //resets dropdown list size to default
     
     if ( fetchInput.value != 0) {
         suggestion.hidden = false //makes dropdown visible       
-        dropDownList.forEach(element => {if (element.label.match(new RegExp(fetchInput.value,'gi'))) {element.hidden = false; suggestion.size = suggestion.size + 1;} else element.hidden = true})//hides or reveals options based on regex       
+        dropDownList[0].childNodes.forEach(element => {if (element.label.match(new RegExp(fetchInput.value,'gi'))) {element.hidden = false; suggestion.size = suggestion.size + 1;} else element.hidden = true})//hides or reveals options based on regex       
     }  else {
         suggestion.hidden = true //hides dropdown
     }
@@ -107,6 +106,7 @@ function createSuggestions(searchItem){
 function fetchAllRobotsButtonPressed (results){
     document.querySelector("#fetchAllRobotsButton").disabled = true    
     resultsArray.push(...results)//so that you can search all added robots persons and vehicles
+    results.forEach(element => createSuggestions(element.name))
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
@@ -114,6 +114,7 @@ function fetchAllRobotsButtonPressed (results){
 function fetchAllMalesButtonPressed(results){
     document.querySelector("#fetchAllMalesButton").disabled = true    
     resultsArray.push(...results)
+    results.forEach(element => createSuggestions(element.name))
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
@@ -121,6 +122,7 @@ function fetchAllMalesButtonPressed(results){
 function fetchAllFemalesButtonPressed(results){
     document.querySelector("#fetchAllFemalesButton").disabled = true    
     resultsArray.push(...results)
+    results.forEach(element => createSuggestions(element.name))
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
@@ -128,6 +130,7 @@ function fetchAllFemalesButtonPressed(results){
 function fetchAllVehiclesButtonPressed(results){
     document.querySelector("#fetchAllVehiclesButton").disabled = true    
     resultsArray.push(...results)
+    results.forEach(element => createSuggestions(element.name))
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
@@ -135,6 +138,7 @@ function fetchAllVehiclesButtonPressed(results){
 function fetchAllPlanetsButtonPressed(results){
     document.querySelector("#fetchAllPlanetsButton").disabled = true    
     resultsArray.push(...results)
+    results.forEach(element => createSuggestions(element.name))
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
@@ -142,6 +146,7 @@ function fetchAllPlanetsButtonPressed(results){
 function fetchAllSpeciesButtonPressed(results){
     document.querySelector("#fetchAllSpeciesButton").disabled = true    
     resultsArray.push(...results)
+    results.forEach(element => createSuggestions(element.name))
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
@@ -149,6 +154,7 @@ function fetchAllSpeciesButtonPressed(results){
 function fetchAllStarshipsButtonPressed(results){
     document.querySelector("#fetchAllStarshipsButton").disabled = true    
     resultsArray.push(...results)
+    results.forEach(element => createSuggestions(element.name))
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
     
 }
@@ -156,6 +162,7 @@ function fetchAllStarshipsButtonPressed(results){
 function fetchAllFilmsButtonPressed(results){
     document.querySelector("#fetchAllFilmsButton").disabled = true    
     resultsArray.push(...results)
+    results.forEach(element => createSuggestions(element.title))
     results.forEach(element => resultArea.insertAdjacentText("beforeend",element.title +" / ") )
 
 }
