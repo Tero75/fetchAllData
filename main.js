@@ -96,7 +96,7 @@ function fetchInputAdded (){
     }
 }
 
-function createSuggestions(searchItem){
+function addToDropDownList(searchItem){
     let options = document.createElement("option")
     options.value = searchItem
     options.textContent = searchItem
@@ -106,76 +106,55 @@ function createSuggestions(searchItem){
 function fetchAllRobotsButtonPressed (results){
     document.querySelector("#fetchAllRobotsButton").disabled = true    
     resultsArray.push(...results)//so that you can search all added robots persons and vehicles
-    results.forEach(element => createSuggestions(element.name))
-    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
-    
+    results.forEach(element => { addToDropDownList(element.name); resultArea.insertAdjacentText("beforeend",element.name +" / ");})    
 }
 
 function fetchAllMalesButtonPressed(results){
     document.querySelector("#fetchAllMalesButton").disabled = true    
     resultsArray.push(...results)
-    results.forEach(element => createSuggestions(element.name))
-    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
-    
+    results.forEach(element => { addToDropDownList(element.name); resultArea.insertAdjacentText("beforeend",element.name +" / ");}) 
 }
 
 function fetchAllFemalesButtonPressed(results){
     document.querySelector("#fetchAllFemalesButton").disabled = true    
     resultsArray.push(...results)
-    results.forEach(element => createSuggestions(element.name))
-    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
-    
+    results.forEach(element => { addToDropDownList(element.name); resultArea.insertAdjacentText("beforeend",element.name +" / ");}) 
 }
 
 function fetchAllVehiclesButtonPressed(results){
     document.querySelector("#fetchAllVehiclesButton").disabled = true    
     resultsArray.push(...results)
-    results.forEach(element => createSuggestions(element.name))
-    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
-    
+    results.forEach(element => { addToDropDownList(element.name); resultArea.insertAdjacentText("beforeend",element.name +" / ");}) 
 }
 
 function fetchAllPlanetsButtonPressed(results){
     document.querySelector("#fetchAllPlanetsButton").disabled = true    
     resultsArray.push(...results)
-    results.forEach(element => createSuggestions(element.name))
-    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
-    
+    results.forEach(element => { addToDropDownList(element.name); resultArea.insertAdjacentText("beforeend",element.name +" / ");}) 
 }
 
 function fetchAllSpeciesButtonPressed(results){
     document.querySelector("#fetchAllSpeciesButton").disabled = true    
     resultsArray.push(...results)
-    results.forEach(element => createSuggestions(element.name))
-    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
-    
+    results.forEach(element => { addToDropDownList(element.name); resultArea.insertAdjacentText("beforeend",element.name +" / ");}) 
 }
 
 function fetchAllStarshipsButtonPressed(results){
     document.querySelector("#fetchAllStarshipsButton").disabled = true    
     resultsArray.push(...results)
-    results.forEach(element => createSuggestions(element.name))
-    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.name +" / ") )
-    
+    results.forEach(element => { addToDropDownList(element.name); resultArea.insertAdjacentText("beforeend",element.name +" / ");})     
 }
 
 function fetchAllFilmsButtonPressed(results){
     document.querySelector("#fetchAllFilmsButton").disabled = true    
     resultsArray.push(...results)
-    results.forEach(element => createSuggestions(element.title))
-    results.forEach(element => resultArea.insertAdjacentText("beforeend",element.title +" / ") )
-
+    results.forEach(element => { addToDropDownList(element.title); resultArea.insertAdjacentText("beforeend",element.title +" / ");}) 
 }
 
-function getAllData (){
-    resultsArray.forEach((element,index) =>{if(element.name==fetchInput.value||element.title==fetchInput.value) resultArea.insertAdjacentText("beforeend", Object.entries(resultsArray[index]).map(([key, value]) => `${key}: ${value}\n`).join(''))} )
+async function getAllData (){
+    resultsArray.forEach((element,index) =>{if(element.name==fetchInput.value||element.title==fetchInput.value)resultArea.insertAdjacentText("beforeend", Object.entries(resultsArray[index]).map(([key, value]) => `\n${key}: ${value}`).join(''))})
 }
-
-function removeAllChildNodes(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
-}
+    
 
 async function GetResultByGender(gender){
     let data = await APICall_swapi("people")
