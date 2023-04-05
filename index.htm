@@ -9,12 +9,13 @@
     <script defer type="module" src="main.js"></script>
 </head>
 <body>
-    <div class="title text-white bg-dark mx-auto p-1" style="height: auto; vertical-align: top; text-align: center;">
-        <h4>Get all data!</h4>
+    <div class="title text-white bg-dark mx-auto p-1 d-flex justify-content-around " style="height: auto; vertical-align: top; text-align: center;">
+        <h2><a href="https://swapi.dev/api/">https://swapi.dev/api/</a></h2><br>
+        <h2>Get all data!</h2>
     </div>
     <div class="container-fluid bg-info text-white" style="min-width: 100vw; min-height: 100vh; display: flex; justify-content: center; align-items: center;">
         <div class="shadow-lg bg-light mx-auto rounded p-2" style="width:fit-content">
-            <div class="btn-group d-flex justify-content-center">
+            <div class="btn-group d-flex flex-wrap">
                 <button id="fetchAllRobotsButton" type="button" class="btn btn-primary">Robots</button>
                 <button id="fetchAllMalesButton" type="button" class="btn btn-primary">males</button>
                 <button id="fetchAllFemalesButton" type="button" class="btn btn-primary">females</button>

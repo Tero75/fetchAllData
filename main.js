@@ -21,7 +21,16 @@ let resultsArray = []
 
 fetchInput.addEventListener("input",()=>{
     //get text written to search... bar
-    fetchInputAdded()
+ 
+    if(fetchInput.value.match(/[A-Za-z0-9]/))//only aplahanumeric characters exepted
+    { 
+        //console.log("alphanumeric found")
+        fetchInputAdded()
+    }
+    else {
+        //console.log("illegal character")
+        suggestion.hidden = true
+    }    
 })
 
 suggestion.addEventListener("click", (event)=> {
@@ -86,11 +95,11 @@ function fetchInputAdded (){
 
     console.log(suggestion)
     let dropDownList = document.querySelectorAll("#suggestion")
-    suggestion.size = 1 //resets dropdown list size to default
+    suggestion.size = 0 //resets dropdown list size to default
     
     if ( fetchInput.value != 0) {
-        suggestion.hidden = false //makes dropdown visible       
         dropDownList[0].childNodes.forEach(element => {if (element.label.match(new RegExp(fetchInput.value,'gi'))) {element.hidden = false; suggestion.size = suggestion.size + 1;} else element.hidden = true})//hides or reveals options based on regex       
+        suggestion.hidden = false //makes dropdown visible       
     }  else {
         suggestion.hidden = true //hides dropdown
     }
