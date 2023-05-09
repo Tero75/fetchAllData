@@ -82,7 +82,7 @@ fetchAllFilmsButton.addEventListener("click", async ()=> {
 
 clearResultsButton.addEventListener("click",()=> resultArea.value = "")
 refreshPageButton.addEventListener("click",()=> window.location.reload())
-getAllDataButton.addEventListener("click",()=> getAllData())
+getAllDataButton.addEventListener("click",()=> getAllData(fetchInput.value))
 
 function fetchInputAdded (dropDownList){ 
 
@@ -107,11 +107,12 @@ function addToDropDownList(searchItem){
 function processQueryResults(results , buttonToDisable) {
     buttonToDisable.disabled = true
     resultsArray.push(...results)
-    results.forEach(element => {addToDropDownList(element.title||element.name); resultArea.insertAdjacentText("beforeend",element.title||element.name + " / ");})
+    results.forEach(element => {addToDropDownList(element.title||element.name); resultArea.insertAdjacentText("beforeend",(element.title||element.name) + " / " );})
 }
 
-function getAllData (){
-    resultsArray.find((element, index) => { if(element.name==fetchInput.value||element.title==fetchInput.value) resultArea.insertAdjacentText("beforeend", Object.entries(resultsArray[index]).map(([key, value]) => `\n${key}: ${value}`).join(''))})
+function getAllData (e){
+    const found = resultsArray.find(element => (element.name == e|| element.title == e))
+    resultArea.insertAdjacentText("beforeend", Object.entries(found).map(([key, value]) => `\n${key}: ${value}`).join(''))
 }
 
 async function GetResults(parameter,gender) {
