@@ -23,7 +23,7 @@ fetchInput.addEventListener("input",()=>{
     //get text written to search... bar
     let nodeList = document.getElementsByTagName('option') // makes live nodelist
     const dropDownList = Array.from(nodeList) // convert nodelist to real array so you can foreach()
-    if (dropDownList.find( element => element.label.match(new RegExp(fetchInput.value,'gi')))) fetchInputAdded(dropDownList);
+    if(dropDownList.map( x => x.label).join("").match(new RegExp(fetchInput.value,'gi'))) fetchInputAdded(dropDownList);
 })
 
 suggestion.addEventListener("click", (event)=> {
@@ -85,7 +85,7 @@ refreshPageButton.addEventListener("click",()=> window.location.reload())
 getAllDataButton.addEventListener("click",()=> getAllData(fetchInput.value))
 
 function fetchInputAdded (dropDownList){ 
-
+    console.log(suggestion)
     console.log(dropDownList)
     suggestion.size = 1 //resets dropdown list size to default
     
