@@ -27,65 +27,23 @@ fetchInput.addEventListener("input",()=>{
 })
 
 suggestion.addEventListener("click", (event)=> { fetchInput.value = event.target.value }) //to catch selected option
-fetchAllRobotsButton.addEventListener("click",()=> fetchAllRobotsButtonPressed)
-fetchAllMalesButton.addEventListener("click", ()=> fetchAllMalesButtonPressed)
-fetchAllFemalesButton.addEventListener("click", ()=> fetchAllFemalesButtonPressed)
-fetchAllVehiclesButton.addEventListener("click", ()=> fetchAllVehiclesButtonPressed)
-fetchAllPlanetsButton.addEventListener("click", ()=> fetchAllPlanetsButtonPressed)
-fetchAllSpeciesButton.addEventListener("click", ()=> fetchAllSpeciesButtonPressed)
-fetchAllStarshipsButton.addEventListener("click", ()=> fetchAllStarshipsButtonPressed)
-fetchAllFilmsButton.addEventListener("click", ()=> fetchAllFilmsButtonPressed)
+fetchAllRobotsButton.addEventListener("click",()=> handleButtonPress("robots","people","n/a",fetchAllRobotsButton))
+fetchAllMalesButton.addEventListener("click", ()=> handleButtonPress("males","people","male",fetchAllMalesButton))
+fetchAllFemalesButton.addEventListener("click", ()=> handleButtonPress("females","people","female",fetchAllFemalesButton))
+fetchAllVehiclesButton.addEventListener("click", ()=> handleButtonPress("vehicles","vehicles",null,fetchAllVehiclesButton))
+fetchAllPlanetsButton.addEventListener("click", ()=> handleButtonPress("planets","planets",null,fetchAllPlanetsButton))
+fetchAllSpeciesButton.addEventListener("click", ()=> handleButtonPress("species","species",null,fetchAllSpeciesButton))
+fetchAllStarshipsButton.addEventListener("click", ()=> handleButtonPress("starships","starships",null,fetchAllStarshipsButton))
+fetchAllFilmsButton.addEventListener("click", ()=> handleButtonPress("films","films",null,fetchAllFilmsButton))
 clearResultsButton.addEventListener("click",()=> resultArea.value = "")
 refreshPageButton.addEventListener("click",()=> window.location.reload())
 getAllDataButton.addEventListener("click",()=> getAllData(fetchInput.value))
 
-async function fetchAllRobotsButtonPressed(){
-    resultArea.insertAdjacentHTML("beforeend","fetching robots...\n")
-    let results = await GetResults("people","n/a")
-    processQueryResults(results,fetchAllRobotsButton)
-}
-
-async function fetchAllMalesButtonPressed(){
-    resultArea.insertAdjacentHTML("beforeend","\nfetching males......\n")
-    let results = await GetResults("people","male")
-    processQueryResults(results,fetchAllMalesButton)
-}
-
-async function fetchAllFemalesButtonPressed(){
-    resultArea.insertAdjacentHTML("beforeend","\nfetching females......\n")
-    let results = await GetResults("people","female")
-    processQueryResults(results,fetchAllFemalesButton)
-}
-
-async function fetchAllVehiclesButtonPressed(){
-    resultArea.insertAdjacentHTML("beforeend","\nfetching vehicles......\n")
-    let results = await GetResults("vehicles",null)
-    processQueryResults(results,fetchAllVehiclesButton)
-}
-
-async function fetchAllPlanetsButtonPressed(){
-    resultArea.insertAdjacentHTML("beforeend","\nfetching planets......\n")
-    let results = await GetResults("planets",null)
-    processQueryResults(results,fetchAllPlanetsButton)
-}
-
-async function fetchAllSpeciesButtonPressed(){
-    resultArea.insertAdjacentHTML("beforeend","\nfetching species......\n")
-    let results = await GetResults("species",null)
-    processQueryResults(results,fetchAllSpeciesButton)
-}
-
-async function fetchAllStarshipsButtonPressed(){
-    resultArea.insertAdjacentHTML("beforeend","\nfetching starships......\n")
-    let results = await GetResults("starships",null)
-    processQueryResults(results,fetchAllStarshipsButton)
-}
-
-
-async function fetchAllFilmsButtonPressed(){
-    resultArea.insertAdjacentHTML("beforeend","\nfetching films......\n")
-    let results = await GetResults("films",null)
-    processQueryResults(results,fetchAllFilmsButton)
+async function handleButtonPress(nameTheCollection, collection, filterCollectionWith, buttonToDisable){
+    resultArea.insertAdjacentHTML("beforeend",`fetching ${nameTheCollection} ...\n`)
+    let results = await GetResults(collection,filterCollectionWith)
+    console.log(results)
+    processQueryResults(results,buttonToDisable)
 }
 
 function fetchInputAdded (dropDownList){ 
