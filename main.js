@@ -26,7 +26,6 @@ fetchInput.addEventListener("input",()=>{
     if(dropDownList.map( x => x.label).join("").match(new RegExp(fetchInput.value,'gi'))) fetchInputAdded(dropDownList);
 })
 
-suggestion.addEventListener("click", (event)=> { fetchInput.value = event.target.value }) //to catch selected option
 fetchAllRobotsButton.addEventListener("click",()=> handleButtonPress("robots","people","n/a",fetchAllRobotsButton))
 fetchAllMalesButton.addEventListener("click", ()=> handleButtonPress("males","people","male",fetchAllMalesButton))
 fetchAllFemalesButton.addEventListener("click", ()=> handleButtonPress("females","people","female",fetchAllFemalesButton))
@@ -39,24 +38,14 @@ clearResultsButton.addEventListener("click",()=> resultArea.value = "")
 refreshPageButton.addEventListener("click",()=> window.location.reload())
 getAllDataButton.addEventListener("click",()=> getAllData(fetchInput.value))
 
-async function handleButtonPress(nameTheCollection, collection, filterCollectionWith, buttonToDisable){
-    resultArea.insertAdjacentHTML("beforeend",`fetching ${nameTheCollection} ...\n`)
+async function handleButtonPress(collectionName, collection, filterCollectionWith, buttonToDisable){
+    resultArea.insertAdjacentHTML("beforeend",`fetching ${collectionName} ...\n`)
     let results = await GetResults(collection,filterCollectionWith)
-    console.log(results)
     processQueryResults(results,buttonToDisable)
 }
 
 function fetchInputAdded (dropDownList){ 
-    console.log(suggestion)
-    console.log(dropDownList)
-    suggestion.size = 1 //resets dropdown list size to default
-    
-    if ( fetchInput.value != 0) {
-        dropDownList.forEach(element => {if (element.label.match(new RegExp(fetchInput.value,'gi'))){element.hidden = false; suggestion.size = suggestion.size + 1;} else element.hidden = true})//hides or reveals options based on regex       
-        suggestion.hidden = false //makes dropdown visible       
-    }  else {
-        suggestion.hidden = true //hides dropdown
-    }
+    dropDownList.forEach(element => {if (element.label.match(new RegExp(fetchInput.value,'gi'))){element.hidden = false} else element.hidden = true})//hides or reveals options based on regex       
 }
 
 function addToDropDownList(searchItem){
@@ -72,8 +61,8 @@ function processQueryResults(results , buttonToDisable) {
     results.forEach(element => {addToDropDownList(element.title||element.name); resultArea.insertAdjacentText("beforeend",(element.title||element.name) + " / " );})
 }
 
-function getAllData (e){
-    const found = resultsArray.find(element => (element.name == e|| element.title == e))
+function getAllData (witchData){
+    const found = resultsArray.find(element => (element.name == witchData|| element.title == witchData))
     resultArea.insertAdjacentText("beforeend", Object.entries(found).map(([key, value]) => `\n${key}: ${value}`).join(''))
 }
 

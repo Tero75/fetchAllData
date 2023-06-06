@@ -12,7 +12,7 @@
     <heading class="title text-white bg-dark mx-auto p-1 d-flex justify-content-around ">
         <a href="https://swapi.dev/api/">https://swapi.dev/api/</a>Get all data!
     </heading>
-    <main class="container-fluid bg-info text-white p-2" style="min-width: 100vw; min-height: 100vh; font-size: 8vw;">
+    <main class="container-fluid bg-info text-white p-2" style="min-width: 100vw; min-height: 100vh">
         <section class="shadow-lg bg-light mx-auto rounded p-2" style="width: fit-content;">
             <section class="btn-group d-flex flex-wrap">
                 <button id="fetchAllRobotsButton" type="button" class="btn btn-primary">Robots</button>
@@ -26,11 +26,12 @@
             </section>
             <section class="searchBar" id="searchBar">
                 <div class="textInput d-flex justify-content-center pt-2">
-                    <input class="form-control" type="search" placeholder="Search..." id="fetchInput" autocomplete="off">
+                    <input class="form-control" type="search" placeholder="Search..." id="fetchInput" autocomplete="off" list="suggestionToUser">
                     <button id="getAllDataButton" type="button" class="btn btn-secondary"><i class="fa fa-search"></i></button>
                 </div>
-                <select class="suggestion" id="suggestion" hidden="true" style="position: absolute; width: 90vw;">
-                </select>
+                <datalist id="suggestionToUser">
+                    <select class="suggestion" id="suggestion" hidden="true" style="position: absolute; width: 90vw;"></select>
+                </datalist>
             </section>
             <div class="resultArea pt-2">
                 <textarea readonly class="form-control" id="resultArea" style="height: 65vh; width: 90vw;"></textarea>
