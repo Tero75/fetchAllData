@@ -2,6 +2,7 @@ console.log("started....")
 
 //Free Star Wars api
 let url = 'https://swapi.dev/api/';
+let resultsArray = [];
 
 const fetchAllRobotsButton = document.querySelector("#fetchAllRobotsButton")
 const fetchAllMalesButton = document.querySelector("#fetchAllMalesButton")
@@ -17,13 +18,12 @@ const getAllDataButton = document.querySelector("#getAllDataButton")
 const clearResultsButton = document.querySelector("#clearResultsButton")
 const refreshPageButton = document.querySelector("#refreshPageButton")
 const suggestion = document.querySelector("#suggestion")
-let resultsArray = []
 
 fetchInput.addEventListener("input",()=>{
     //get text written to search... bar
     let nodeList = document.getElementsByTagName('option') // makes live nodelist
-    const dropDownList = Array.from(nodeList) // convert nodelist to real array so you can foreach()
-    if(dropDownList.map( x => x.label).join("").match(new RegExp(fetchInput.value,'gi'))) fetchInputAdded(dropDownList);
+    const dropDownList = Array.from(nodeList) // convert's nodelist to real array so you can foreach()
+    fetchInputAdded(dropDownList)
 })
 
 fetchAllRobotsButton.addEventListener("click",()=> handleButtonPress("robots","people","n/a",fetchAllRobotsButton))
@@ -45,7 +45,7 @@ async function handleButtonPress(collectionName, collection, filterCollectionWit
 }
 
 function fetchInputAdded (dropDownList){ 
-    dropDownList.forEach(element => {if (element.label.match(new RegExp(fetchInput.value,'gi'))){element.hidden = false} else element.hidden = true})//hides or reveals options based on regex       
+    dropDownList.forEach(element => (element.label.match(new RegExp(fetchInput.value,'gi')))? element.hidden = false: element.hidden = true)//hides or reveals options based on regex       
 }
 
 function addToDropDownList(searchItem){
