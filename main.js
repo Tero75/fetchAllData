@@ -26,26 +26,71 @@ fetchInput.addEventListener("input",()=>{
     fetchInputAdded(dropDownList)
 })
 
-fetchAllRobotsButton.addEventListener("click",()=> handleButtonPress("robots","people","n/a",fetchAllRobotsButton))
-fetchAllMalesButton.addEventListener("click", ()=> handleButtonPress("males","people","male",fetchAllMalesButton))
-fetchAllFemalesButton.addEventListener("click", ()=> handleButtonPress("females","people","female",fetchAllFemalesButton))
-fetchAllVehiclesButton.addEventListener("click", ()=> handleButtonPress("vehicles","vehicles",null,fetchAllVehiclesButton))
-fetchAllPlanetsButton.addEventListener("click", ()=> handleButtonPress("planets","planets",null,fetchAllPlanetsButton))
-fetchAllSpeciesButton.addEventListener("click", ()=> handleButtonPress("species","species",null,fetchAllSpeciesButton))
-fetchAllStarshipsButton.addEventListener("click", ()=> handleButtonPress("starships","starships",null,fetchAllStarshipsButton))
-fetchAllFilmsButton.addEventListener("click", ()=> handleButtonPress("films","films",null,fetchAllFilmsButton))
+fetchAllRobotsButton.addEventListener("click", fetchAllRobotsButtonPressed)
+fetchAllMalesButton.addEventListener("click", fetchAllMalesButtonPressed)
+fetchAllFemalesButton.addEventListener("click", fetchAllFemalesButtonPressed)
+fetchAllVehiclesButton.addEventListener("click", fetchAllVehiclesButtonPressed)
+fetchAllPlanetsButton.addEventListener("click", fetchAllPlanetsButtonPressed)
+fetchAllSpeciesButton.addEventListener("click", fetchAllSpeciesButtonPressed)
+fetchAllStarshipsButton.addEventListener("click", fetchAllStarshipsButtonPressed)
+fetchAllFilmsButton.addEventListener("click", fetchAllFilmsButtonPressed)
 clearResultsButton.addEventListener("click",()=> resultArea.value = "")
 refreshPageButton.addEventListener("click",()=> window.location.reload())
 getAllDataButton.addEventListener("click",()=> getAllData(fetchInput.value))
 
-async function handleButtonPress(collectionName, collection, filterCollectionWith, buttonToDisable){
-    resultArea.insertAdjacentHTML("beforeend",`fetching ${collectionName} ...\n`)
-    let results = await GetResults(collection,filterCollectionWith)
-    processQueryResults(results,buttonToDisable)
+async function fetchAllRobotsButtonPressed(){
+    resultArea.insertAdjacentText("beforeend","\nFetching all robots...\n")
+    let results = await GetResults("people","n/a")
+    processQueryResults(results,fetchAllRobotsButton)
+}
+
+async function fetchAllMalesButtonPressed(){
+    resultArea.insertAdjacentText("beforeend","\nFetching all males...\n")
+    let results = await GetResults("people","male")
+    processQueryResults(results,fetchAllMalesButton)
+}
+
+async function fetchAllFemalesButtonPressed(){
+    resultArea.insertAdjacentText("beforeend","\nFetching all females...\n")
+    let results = await GetResults("people","female")
+    processQueryResults(results,fetchAllFemalesButton)
+}
+
+async function fetchAllVehiclesButtonPressed(){
+    resultArea.insertAdjacentText("beforeend","\nFetching all vehicles...\n")
+    let results = await GetResults("vehicles")
+    processQueryResults(results,fetchAllVehiclesButton)
+}
+
+async function fetchAllPlanetsButtonPressed(){
+    resultArea.insertAdjacentText("beforeend","\nFetching all planets...\n")
+    let results = await GetResults("planets")
+    processQueryResults(results,fetchAllPlanetsButton)
+}
+
+async function fetchAllSpeciesButtonPressed(){
+    resultArea.insertAdjacentText("beforeend","\nFetching all species...\n")
+    let results = await GetResults("species")
+    processQueryResults(results,fetchAllSpeciesButton)
+}
+
+async function fetchAllStarshipsButtonPressed(){
+    resultArea.insertAdjacentText("beforeend","\nFetching all starships...\n")
+    let results = await GetResults("starships")
+    processQueryResults(results,fetchAllStarshipsButton)
+}
+
+async function fetchAllFilmsButtonPressed(){
+    resultArea.insertAdjacentText("beforeend","\nFetching all films...\n")
+    let results = await GetResults("films")
+    processQueryResults(results,fetchAllFilmsButton)
 }
 
 function fetchInputAdded (dropDownList){ 
-    dropDownList.forEach(element => (element.label.match(new RegExp(fetchInput.value,'gi')))? element.hidden = false: element.hidden = true)//hides or reveals options based on regex       
+    let regex = new RegExp(fetchInput.value,'gi')
+    let ELEMENT_HIDDEN_FALSE = "element.hidden = false"
+    let ELEMENT_HIDDEN_TRUE = "element.hidden = true"
+    dropDownList.forEach(element => (element.label.match(regex))? ELEMENT_HIDDEN_TRUE: ELEMENT_HIDDEN_FALSE)//hides or reveals options based on regex   
 }
 
 function addToDropDownList(searchItem){
