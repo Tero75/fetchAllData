@@ -4,6 +4,8 @@ console.log("started....")
 let url = 'https://swapi.dev/api/';
 let resultsArray = [];
 
+//get data from html
+
 const fetchAllRobotsButton = document.querySelector("#fetchAllRobotsButton")
 const fetchAllMalesButton = document.querySelector("#fetchAllMalesButton")
 const fetchAllFemalesButton = document.querySelector("#fetchAllFemalesButton")
@@ -18,6 +20,8 @@ const getAllDataButton = document.querySelector("#getAllDataButton")
 const clearResultsButton = document.querySelector("#clearResultsButton")
 const refreshPageButton = document.querySelector("#refreshPageButton")
 const suggestion = document.querySelector("#suggestion")
+
+//eventListeners
 
 fetchInput.addEventListener("input",()=>{
     //get text written to search... bar
@@ -37,6 +41,8 @@ fetchAllFilmsButton.addEventListener("click", fetchAllFilmsButtonPressed)
 clearResultsButton.addEventListener("click",()=> resultArea.value = "")
 refreshPageButton.addEventListener("click",()=> window.location.reload())
 getAllDataButton.addEventListener("click",()=> getAllData(fetchInput.value))
+
+//button press handler functions
 
 async function fetchAllRobotsButtonPressed(){
     resultArea.insertAdjacentText("beforeend","\nFetching all robots...\n")
@@ -86,6 +92,8 @@ async function fetchAllFilmsButtonPressed(){
     processQueryResults(results,fetchAllFilmsButton)
 }
 
+//dropdownlist handler functions
+
 function fetchInputAdded (dropDownList){ 
     let regex = new RegExp(fetchInput.value,'gi')
     let ELEMENT_HIDDEN_FALSE = "element.hidden = false"
@@ -99,6 +107,8 @@ function addToDropDownList(searchItem){
     options.textContent = searchItem
     suggestion.appendChild(options)
 }
+
+// results handler functions
 
 function processQueryResults(results , buttonToDisable) {
     buttonToDisable.disabled = true
