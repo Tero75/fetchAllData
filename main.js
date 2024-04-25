@@ -15,7 +15,7 @@ const fetchAllSpeciesButton = document.querySelector("#fetchAllSpeciesButton")
 const fetchAllStarshipsButton = document.querySelector("#fetchAllStarshipsButton")
 const fetchAllFilmsButton = document.querySelector("#fetchAllFilmsButton")
 const resultArea = document.querySelector("#resultArea")
-const fetchInput = document.querySelector("#fetchInput")
+const fetchInput = document.querySelector("#dropdown")
 const getAllDataButton = document.querySelector("#getAllDataButton")
 const clearResultsButton = document.querySelector("#clearResultsButton")
 const refreshPageButton = document.querySelector("#refreshPageButton")
@@ -38,56 +38,56 @@ fetchAllPlanetsButton.addEventListener("click", fetchAllPlanetsButtonPressed)
 fetchAllSpeciesButton.addEventListener("click", fetchAllSpeciesButtonPressed)
 fetchAllStarshipsButton.addEventListener("click", fetchAllStarshipsButtonPressed)
 fetchAllFilmsButton.addEventListener("click", fetchAllFilmsButtonPressed)
-clearResultsButton.addEventListener("click",()=> resultArea.value = "")
+clearResultsButton.addEventListener("click",()=> resultArea.remove())
 refreshPageButton.addEventListener("click",()=> window.location.reload())
 getAllDataButton.addEventListener("click",()=> getAllData(fetchInput.value))
 
 //button press handler functions
 
 async function fetchAllRobotsButtonPressed(){
-    resultArea.insertAdjacentText("beforeend","\nFetching all robots...\n")
+    resultArea.insertAdjacentHTML("beforeend","<br>Fetching all robots...<br>")
     let results = await GetResults("people","n/a")
     processQueryResults(results,fetchAllRobotsButton)
 }
 
 async function fetchAllMalesButtonPressed(){
-    resultArea.insertAdjacentText("beforeend","\nFetching all males...\n")
+    resultArea.insertAdjacentHTML("beforeend","<br>Fetching all males...<br>")
     let results = await GetResults("people","male")
     processQueryResults(results,fetchAllMalesButton)
 }
 
 async function fetchAllFemalesButtonPressed(){
-    resultArea.insertAdjacentText("beforeend","\nFetching all females...\n")
+    resultArea.insertAdjacentHTML("beforeend","<br>Fetching all females...<br>")
     let results = await GetResults("people","female")
     processQueryResults(results,fetchAllFemalesButton)
 }
 
 async function fetchAllVehiclesButtonPressed(){
-    resultArea.insertAdjacentText("beforeend","\nFetching all vehicles...\n")
+    resultArea.insertAdjacentHTML("beforeend","<br>Fetching all vehicles...<br>")
     let results = await GetResults("vehicles")
     processQueryResults(results,fetchAllVehiclesButton)
 }
 
 async function fetchAllPlanetsButtonPressed(){
-    resultArea.insertAdjacentText("beforeend","\nFetching all planets...\n")
+    resultArea.insertAdjacentHTML("beforeend","<br>Fetching all planets...<br>")
     let results = await GetResults("planets")
     processQueryResults(results,fetchAllPlanetsButton)
 }
 
 async function fetchAllSpeciesButtonPressed(){
-    resultArea.insertAdjacentText("beforeend","\nFetching all species...\n")
+    resultArea.insertAdjacentHTML("beforeend","<br>Fetching all species...<br>")
     let results = await GetResults("species")
     processQueryResults(results,fetchAllSpeciesButton)
 }
 
 async function fetchAllStarshipsButtonPressed(){
-    resultArea.insertAdjacentText("beforeend","\nFetching all starships...\n")
+    resultArea.insertAdjacentHTML("beforeend","<br>Fetching all starships...<br>")
     let results = await GetResults("starships")
     processQueryResults(results,fetchAllStarshipsButton)
 }
 
 async function fetchAllFilmsButtonPressed(){
-    resultArea.insertAdjacentText("beforeend","\nFetching all films...\n")
+    resultArea.insertAdjacentHTML("beforeend","<br>Fetching all films...<br>")
     let results = await GetResults("films")
     processQueryResults(results,fetchAllFilmsButton)
 }
@@ -118,7 +118,7 @@ function processQueryResults(results , buttonToDisable) {
 
 function getAllData (witchData){
     const found = resultsArray.find(element => (element.name == witchData|| element.title == witchData))
-    resultArea.insertAdjacentText("beforeend", Object.entries(found).map(([key, value]) => `\n${key}: ${value}`).join(''))
+    resultArea.insertAdjacentHTML("beforeend",Object.entries(found).map(([key, value]) =>`<br>${key}: ${value}`).join(''))
 }
 
 async function GetResults(parameter,gender) {
@@ -131,7 +131,8 @@ async function APICall_swapi(args){
     if(response.ok){
         let data = await response.json(); // read response body and parse as JSON
         return data.results
-    }else{
+    }
+    if(!response.ok){
         console.log(response.status)
     }
 }

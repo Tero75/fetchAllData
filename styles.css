@@ -1,0 +1,71 @@
+body{
+    font-size: 20px;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+}
+button{
+    color: gray;
+    font-size: large;
+    background-color: white;
+    border: 1;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 5px 20px 5px 20px;
+}
+#searchBar{
+    position: relative;
+    top: 10%;
+    background-color: black;
+    align-content: center;
+    margin: auto;
+    width: 50vw;
+    height: 10vh;
+    border-radius: 45px;
+    box-shadow: 5px 5px 25px black;
+}
+#dropdown{
+    margin: auto;
+    padding: 2px;
+    width: 40vw;
+    background-color: black;
+    color: white;
+    font-size: 15px;
+    border-width: 0;
+    outline-style: none;
+}
+#heading{  
+    width: 100vw;
+    align-self: center;
+}
+#getAllDataButton{
+    background-color: black;
+    color: white;
+    height: 45px;
+    width: 45px;
+    border-radius: 45px;
+    border-width: 2px;
+    border-color: white;
+    padding: 0;
+}
+#clearResultsButton, #refreshPageButton{
+    background-color: white;
+    color: black;
+    height: 45px;
+    width: 45px;
+    border-radius: 45px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    padding: 0;
+}
+#btn-group{
+    float:left;
+}
+#action-buttons{
+    float: right;
+}
+#resultArea{
+    position:relative;
+    top: 20%;
+}
