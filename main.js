@@ -17,8 +17,6 @@ const fetchAllFilmsButton = document.querySelector("#fetchAllFilmsButton")
 const resultArea = document.querySelector("#resultArea")
 const fetchInput = document.querySelector("#dropdown")
 const getAllDataButton = document.querySelector("#getAllDataButton")
-const clearResultsButton = document.querySelector("#clearResultsButton")
-const refreshPageButton = document.querySelector("#refreshPageButton")
 const suggestion = document.querySelector("#suggestion")
 
 //eventListeners
@@ -38,8 +36,6 @@ fetchAllPlanetsButton.addEventListener("click", fetchAllPlanetsButtonPressed)
 fetchAllSpeciesButton.addEventListener("click", fetchAllSpeciesButtonPressed)
 fetchAllStarshipsButton.addEventListener("click", fetchAllStarshipsButtonPressed)
 fetchAllFilmsButton.addEventListener("click", fetchAllFilmsButtonPressed)
-clearResultsButton.addEventListener("click",()=> resultArea.remove())
-refreshPageButton.addEventListener("click",()=> window.location.reload())
 getAllDataButton.addEventListener("click",()=> getAllData(fetchInput.value))
 
 //button press handler functions

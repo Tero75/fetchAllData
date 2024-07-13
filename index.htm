@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="heading">
-        <div id="btn-group">
+    <div id="app">
+        <div id="btn-group">     
             <button id="fetchAllRobotsButton" type="button">Robots</button>
             <button id="fetchAllMalesButton" type="button">males</button>
             <button id="fetchAllFemalesButton" type="button">females</button>
@@ -19,22 +19,18 @@
             <button id="fetchAllSpeciesButton" type="button">Species</button>
             <button id="fetchAllStarshipsButton" type="button">Starships</button>
             <button id="fetchAllFilmsButton" type="button">Films</button>                
+        </div>    
+        <div id="searchBar" class="searchBar">
+            <div>
+                <input type="text" placeholder="Search..." id="dropdown" autocomplete="off" list="suggestionToUser">
+                <button id="getAllDataButton" class="getAllDataButton" type="button" ><i class="fa fa-search"></i></button>
+            </div>
+            <datalist id="suggestionToUser">
+                <select id="suggestion" hidden="true"></select>
+            </datalist>
         </div>
-        <div id="action-buttons">
-            <button id="clearResultsButton"  type="button"><i class="fa fa-trash"></i></button>
-            <button id="refreshPageButton" type="button"><i class="fa fa-refresh"></i></button>
+        <div id="resultArea">
         </div>
-    </div>    
-    <div id="searchBar" class="searchBar">
-        <div>
-            <input type="text" placeholder="Search..." id="dropdown" autocomplete="off" list="suggestionToUser">
-            <button id="getAllDataButton" class="getAllDataButton" type="button" ><i class="fa fa-search"></i></button>
-        </div>
-        <datalist id="suggestionToUser">
-            <select id="suggestion" hidden="true"></select>
-        </datalist>
-    </div>
-    <div id="resultArea">
     </div>
 </body>
 </html>
